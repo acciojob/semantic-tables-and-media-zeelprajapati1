@@ -3,25 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semantic Tables and Media</title>
+    <title>Sorted Articles</title>
     <style>
-        table {
-            width: 50%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            border: 1px solid black;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
         }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
+        ul {
+            list-style-type: none;
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            padding: 5px 0;
         }
     </style>
 </head>
 <body>
+    <h1>Sorted Articles</h1>
+    <ul id="bands"></ul>
+
+    <script>
+        const bands = [
+            'The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean',
+            'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans',
+            'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'
+        ];
+
+        function stripArticle(name) {
+            return name.replace(/^(a |an |the )/i, '').trim();
+        }
+
+        const sortedBands = bands.sort((a, b) => stripArticle(a).localeCompare(stripArticle(b)));
+
+        document.getElementById('bands').innerHTML = sortedBands.map(band => <li>${band}</li>).join('');
+    </script>
 
     <!-- Semantic Table -->
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>Roll Number</th>
@@ -45,26 +69,25 @@
     </table>
 
     <!-- Heading for Media List -->
-    <h2 style="text-align: center;">List of medias</h2>
+    <h2>List of medias</h2>
 
-    <!-- Ordered List of Media -->
+    <!-- Ordered List -->
     <ol>
         <li>
-            <img src="https://picsum.photos/id/123/200/300" alt="Random Placeholder Image">
+            <img src="https://picsum.photos/id/123/200/300" alt="Sample Image">
         </li>
         <li>
-            <video width="320" height="240" controls>
+            <video controls>
                 <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </li>
         <li>
-            <audio controls>
+            <audio controls src="http://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg">
                 <source src="http://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" type="audio/ogg">
-                Your browser does not support the audio tag.
+                Your browser does not support the audio element.
             </audio>
         </li>
     </ol>
-
 </body>
 </html>
